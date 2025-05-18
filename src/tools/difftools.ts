@@ -4,7 +4,8 @@ import { diffStrings } from "../service/diff";
 export const diffStringsTool: CustomFunctionTool = {
     type: "function",
     name: "diffStrings",
-    description: "Returns a unified diff of two strings. Optionally specify a file name for diff headers.",
+    description:
+        "Returns a unified diff of two strings. Optionally specify a file name for diff headers.",
     strict: true,
     parameters: {
         type: "object",
@@ -19,14 +20,18 @@ export const diffStringsTool: CustomFunctionTool = {
             },
             fileName: {
                 type: "string",
-                description: "Optional file name for diff header (default is 'file')",
-                default: "file",
+                description:
+                    "Optional file name for diff header (default is 'file')",
             },
         },
-        required: ["oldStr", "newStr"],
+        required: ["oldStr", "newStr", "fileName"],
         additionalProperties: false,
     },
-    functionToCall: async (oldStr: string, newStr: string, fileName: string = "file") => {
+    functionToCall: async (
+        oldStr: string,
+        newStr: string,
+        fileName: string = "file"
+    ) => {
         return diffStrings(oldStr, newStr, fileName);
     },
 };

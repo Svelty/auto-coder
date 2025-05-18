@@ -21,26 +21,55 @@ export type TreeNode = FileNode | DirectoryNode;
 export const readDirRecursive = async (
     dir: string,
     base: string = dir,
-    ignoreDirs: string[] = ["node_modules"]
+    ignoreDirs: string[] = ["node_modules", ".git"]
 ): Promise<TreeNode[]> => {
+    // Load and parse .gitignore only at the top-level call
+    let ig: ReturnType<typeof ignore> | null = null;
+    if (base === dir) {
+        try {
+            const gitignorePath = path.join(process.cwd(), ".gitignore");
+            const gitignoreContent = await fs.readFile(gitignorePath, "utf8");
+            ig = ignore().add(gitignoreContent);
+        } catch (err) {
+            ig = ignore(); // fallback to no ignores if not found
+        }
+    }
+
     const entries = await fs.readdir(dir, { withFileTypes: true });
     const result: TreeNode[] = [];
 
-    for (const entry of entries) {
+    // Pass along the ignore instance through recursion
+    async function processEntry(entry: any, ig: any): Promise<void> {
         const fullPath = path.join(dir, entry.name);
         const relativePath = path.relative(base, fullPath);
 
-        if (entry.isDirectory()) {
-            if (ignoreDirs.includes(entry.name)) {
+        // Check if .gitignore ignores this path
+        if (ig && ig.ignores(relativePath + (entry.isDirectory() ? "/" : ""))) {
+            // If it's a directory, include node but do not recurse
+            if (entry.isDirectory()) {
                 result.push({
                     type: "directory",
                     name: entry.name,
                     path: relativePath,
                     children: [],
                 });
-                continue;
             }
+            // If it's an ignored file, skip it entirely
+            return;
+        }
 
+        if (entry.isDirectory()) {
+            // Support legacy explicit ignoreDirs for hardcoded patterns
+            if (ignoreDirs && ignoreDirs.includes(entry.name)) {
+                result.push({
+                    type: "directory",
+                    name: entry.name,
+                    path: relativePath,
+                    children: [],
+                });
+                return;
+            }
+            // Not ignored: recurse
             result.push({
                 type: "directory",
                 name: entry.name,
@@ -48,6 +77,7 @@ export const readDirRecursive = async (
                 children: await readDirRecursive(fullPath, base, ignoreDirs),
             });
         } else {
+            // Not ignored: push file
             const stats = await fs.stat(fullPath);
             result.push({
                 type: "file",
@@ -58,6 +88,10 @@ export const readDirRecursive = async (
         }
     }
 
+    // Recursively process entries
+    for (const entry of entries) {
+        await processEntry(entry, ig);
+    }
     return result;
 };
 

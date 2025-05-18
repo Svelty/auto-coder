@@ -6,6 +6,12 @@ import {
     readProjectFileTool,
     writeProjectFileTool,
 } from "./tools/filetools";
+import {
+    getSessionIdTool,
+    setSessionIdTool,
+    listSessionIdsTool,
+    getChatSessionTool
+} from "./tools/sessiontools";
 import { ResponseInput } from "openai/resources/responses/responses";
 
 const rl = readline.createInterface({
@@ -15,7 +21,7 @@ const rl = readline.createInterface({
 
 const chatSessions: Map<number, ResponseInput> = new Map();
 
-const sessionId = 1;
+let sessionId = 1;
 
 (async () => {
     process.on("SIGINT", () => {
@@ -29,6 +35,12 @@ const sessionId = 1;
     agent.addFunctionTool(getProjectStructureTool);
     agent.addFunctionTool(readProjectFileTool);
     agent.addFunctionTool(writeProjectFileTool);
+
+    // Add session tools
+    agent.addFunctionTool(getSessionIdTool);
+    agent.addFunctionTool(setSessionIdTool);
+    agent.addFunctionTool(listSessionIdsTool);
+    agent.addFunctionTool(getChatSessionTool);
 
     console.log(
         "Hi, welcome to your command line helper, what can I do for you today?"
@@ -82,9 +94,27 @@ const sessionId = 1;
 
             chatSessions.set(currentSessionId, res);
         } catch (e) {
-            console.log("error running function caller");
+            console.log("error running function caller: " + e);
             rl.close();
             break;
         }
     }
 })();
+
+// --- Session/Chat Management Helpers ---
+
+export function getSessionId(): number {
+    return sessionId;
+}
+
+export function setSessionId(newId: number): void {
+    sessionId = newId;
+}
+
+export function listSessionIds(): number[] {
+    return Array.from(chatSessions.keys());
+}
+
+export function getChatSession(id: number): ResponseInput | undefined {
+    return chatSessions.get(id);
+}
