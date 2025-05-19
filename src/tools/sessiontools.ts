@@ -1,5 +1,5 @@
 import { CustomFunctionTool } from "../agents/agent";
-import { getSessionId, setSessionId, listSessionIds, getChatSession } from "../index";
+import { getSessionId, setSessionId, listSessionIds, getChatSession } from "../sessionStore";
 
 export const getSessionIdTool: CustomFunctionTool = {
     type: "function",
