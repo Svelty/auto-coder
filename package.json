@@ -22,12 +22,16 @@
     "seed:run": "knex seed:run"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^3.0.9",
+    "@ai-sdk/openai": "^3.0.7",
     "@types/knex": "^0.16.1",
+    "ai": "^6.0.26",
     "diff": "^8.0.1",
     "dotenv": "^16.5.0",
     "ignore": "^7.0.4",
     "knex": "^3.1.0",
     "openai": "^4.100.0",
-    "pg": "^8.16.0"
+    "pg": "^8.16.0",
+    "zod": "^4.3.5"
   }
 }
