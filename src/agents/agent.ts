@@ -3,7 +3,8 @@ import {
     ResponseCreateParamsNonStreaming,
     ResponseInput,
 } from "openai/resources/responses/responses";
-import { createModelResponseRequest } from "../client/openai";
+import { createModelResponseRequest as openAiCreateModelResponseRequest } from "../client/openai";
+import { createModelResponseRequest as vercelCreateModelResponseRequest } from "../client/vercel";
 
 export const expandPrompt = () => {};
 
@@ -40,9 +41,10 @@ export class AgentService {
 
     async runFunctionCallingAgent(
         prompt: string | ResponseInput,
-        initalInstructions: string
+        initalInstructions: string,
+        provider: string = ""
     ) {
-        const model = "gpt-4.1"; //"o4-mini",   //"gpt-4o" $2.50, o4-mini $1.10, gpt-4.1 $2.00
+        const model = "gpt-5-nano"; //"gpt-4.1"; //"gpt-5-nano"; //; //"o4-mini",   //"gpt-4o" $2.50, o4-mini $1.10, gpt-4.1 $2.00
 
         let input: any[] = [];
         if (typeof prompt == "string") {
@@ -60,7 +62,7 @@ export class AgentService {
             model: model,
             input,
             instructions: initalInstructions,
-            previous_response_id: null,
+            // previous_response_id: null,
             store: false, //Whether to store the generated model response for later retrieval via API. boolean | null;
             user: "me", //unique id that can identify end user
             //@ts-ignore
@@ -68,7 +70,12 @@ export class AgentService {
         };
 
         try {
-            const response = await createModelResponseRequest(request);
+            let response;
+            if (provider == "vercel") {
+                response = await vercelCreateModelResponseRequest(request);
+            } else {
+                response = await openAiCreateModelResponseRequest(request);
+            }
 
             let previousResponseId = response.id;
             let modelOutput = response.output;
@@ -136,9 +143,19 @@ export class AgentService {
 
                 console.log(`agent is on iteration ${iterations} `);
 
-                followUpResponse = await createModelResponseRequest(
-                    functionResultsRequest
-                );
+                // followUpResponse = await createModelResponseRequest(
+                //     functionResultsRequest
+                // );
+
+                if (provider == "vercel") {
+                    followUpResponse = await vercelCreateModelResponseRequest(
+                        functionResultsRequest
+                    );
+                } else {
+                    followUpResponse = await openAiCreateModelResponseRequest(
+                        functionResultsRequest
+                    );
+                }
 
                 modelOutput = followUpResponse.output;
                 hasFunctionCall = modelOutput.some(
@@ -151,8 +168,14 @@ export class AgentService {
                 }
             }
 
+            const cleanOutput = modelOutput.map((item) => {
+                const { id, ...rest } = item; // separate 'id' from the rest of the data
+                return rest; // return everything EXCEPT the id
+            });
+
             //TODO: do i want to be saving the whole conversation including all the function calls or do i just want the final result?
-            const conversation = [...input, ...modelOutput];
+            // const conversation = [...input, ...modelOutput];
+            const conversation = [...input, ...cleanOutput];
 
             //TODO:do we need an intermidary step here where we can optionally process the results before sending back to gpt
 

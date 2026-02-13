@@ -1,0 +1,44 @@
+ok, so currently in the agentRunner I register all my tools and then pass the prompt to the agent
+
+
+
+
+need rest api 
+
+need to create "tool sets" which can be given to an agent
+
+tool set defines the agent
+
+so for example: jira agent will need the jira toolset
+
+maybe sub agents will be behind a manager agent
+
+i guess a rest api other than the "chat" interface which will be used to interact with the agent should have other endpoints for collecting data 
+
+
+
+
+so how does this work? I say, Hi bot i would like to start a new ticket
+
+
+
+ok i guess i need to define the parts here first:
+
+manager bot: main chat interface
+
+jira agent:
+
+coding agent:
+
+review agent:
+
+build and merge:
+
+
+
+i think the key part here is to get specific with the tools, define a limited domain in which the agent will work
+instead of building a general coding agent we can try to build an agent that focuses on one 
+constraints, how constrained is an agent, can they edit any file or do they only work in one module?
+what can we gain out of making extreemly specific tools?
+
+how would i go about running multiple agents at once?

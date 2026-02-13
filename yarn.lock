@@ -2,6 +2,47 @@
 # yarn lockfile v1
 
 
+"@ai-sdk/anthropic@^3.0.9":
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/@ai-sdk/anthropic/-/anthropic-3.0.9.tgz#d750552f5b08389ab107a1e8f8cb7ee318b9d93e"
+  integrity sha512-QBD4qDnwIHd+N5PpjxXOaWJig1aRB43J0PM5ZUe6Yyl9Qq2bUmraQjvNznkuFKy+hMFDgj0AvgGogTiO5TC+qA==
+  dependencies:
+    "@ai-sdk/provider" "3.0.2"
+    "@ai-sdk/provider-utils" "4.0.4"
+
+"@ai-sdk/gateway@3.0.10":
+  version "3.0.10"
+  resolved "https://registry.yarnpkg.com/@ai-sdk/gateway/-/gateway-3.0.10.tgz#1017231089046bf6eddc442fda2a910a8177928c"
+  integrity sha512-sRlPMKd38+fdp2y11USW44c0o8tsIsT6T/pgyY04VXC3URjIRnkxugxd9AkU2ogfpPDMz50cBAGPnMxj+6663Q==
+  dependencies:
+    "@ai-sdk/provider" "3.0.2"
+    "@ai-sdk/provider-utils" "4.0.4"
+    "@vercel/oidc" "3.1.0"
+
+"@ai-sdk/openai@^3.0.7":
+  version "3.0.7"
+  resolved "https://registry.yarnpkg.com/@ai-sdk/openai/-/openai-3.0.7.tgz#50359509b0d95cc1789e8740d9980a40117d2452"
+  integrity sha512-CBoYn1U59Lop8yBL9KuVjHCKc/B06q9Qo0SasRwHoyMEq+X4I8LQZu3a8Ck1jwwcZTTxfyiExB70LtIRSynBDA==
+  dependencies:
+    "@ai-sdk/provider" "3.0.2"
+    "@ai-sdk/provider-utils" "4.0.4"
+
+"@ai-sdk/provider-utils@4.0.4":
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/@ai-sdk/provider-utils/-/provider-utils-4.0.4.tgz#b2f5af446f152be64124725677a900be615c8766"
+  integrity sha512-VxhX0B/dWGbpNHxrKCWUAJKXIXV015J4e7qYjdIU9lLWeptk0KMLGcqkB4wFxff5Njqur8dt8wRi1MN9lZtDqg==
+  dependencies:
+    "@ai-sdk/provider" "3.0.2"
+    "@standard-schema/spec" "^1.1.0"
+    eventsource-parser "^3.0.6"
+
+"@ai-sdk/provider@3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@ai-sdk/provider/-/provider-3.0.2.tgz#d4ee0b53e2c0b2a1b3e36f7356844fda53e63487"
+  integrity sha512-HrEmNt/BH/hkQ7zpi2o6N3k1ZR1QTb7z85WYhYygiTxOQuaml4CMtHCWRbric5WPU+RNsYI7r1EpyVQMKO1pYw==
+  dependencies:
+    json-schema "^0.4.0"
+
 "@cspotcode/source-map-support@^0.8.0":
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/@cspotcode/source-map-support/-/source-map-support-0.8.1.tgz#00629c35a688e05a88b1cda684fb9d5e73f000a1"
@@ -26,6 +67,16 @@
   dependencies:
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
+
+"@opentelemetry/api@1.9.0":
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/api/-/api-1.9.0.tgz#d03eba68273dc0f7509e2a3d5cba21eae10379fe"
+  integrity sha512-3giAOQvZiH5F9bMlMiv8+GSPMeqg0dbaeo58/0SlA9sxSqZhnUtxzX9/2FzyhS9sWQf5S0GJE0AKBrFqjpeYcg==
+
+"@standard-schema/spec@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@standard-schema/spec/-/spec-1.1.0.tgz#a79b55dbaf8604812f52d140b2c9ab41bc150bb8"
+  integrity sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==
 
 "@tsconfig/node10@^1.0.7":
   version "1.0.11"
@@ -76,6 +127,11 @@
   dependencies:
     undici-types "~5.26.4"
 
+"@vercel/oidc@3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@vercel/oidc/-/oidc-3.1.0.tgz#066caee449b84079f33c7445fc862464fe10ec32"
+  integrity sha512-Fw28YZpRnA3cAHHDlkt7xQHiJ0fcL+NRcIqsocZQUSmbzeIKRpwttJjik5ZGanXP+vlA4SbTg+AbA3bP363l+w==
+
 abort-controller@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/abort-controller/-/abort-controller-3.0.0.tgz#eaf54d53b62bae4138e809ca225c8439a6efb392"
@@ -101,6 +157,16 @@ agentkeepalive@^4.2.1:
   integrity sha512-kja8j7PjmncONqaTsB8fQ+wE2mSU2DJ9D4XKoJ5PFWIdRMa6SLSN1ff4mOr4jCbfRSsxR4keIiySJU0N9T5hIQ==
   dependencies:
     humanize-ms "^1.2.1"
+
+ai@^6.0.26:
+  version "6.0.26"
+  resolved "https://registry.yarnpkg.com/ai/-/ai-6.0.26.tgz#0c9d77ff6c410ea07047bc008fec390a2cbaf056"
+  integrity sha512-zU3Nvx2uTYzCOiWjsXZbsIFqk8ovn9NvhqXaLGIGe9m7p+faC0bRjWoY3fghzswEwEI9krJn73sd07IPzpl4Qw==
+  dependencies:
+    "@ai-sdk/gateway" "3.0.10"
+    "@ai-sdk/provider" "3.0.2"
+    "@ai-sdk/provider-utils" "4.0.4"
+    "@opentelemetry/api" "1.9.0"
 
 arg@^4.1.0:
   version "4.1.3"
@@ -220,6 +286,11 @@ event-target-shim@^5.0.0:
   resolved "https://registry.yarnpkg.com/event-target-shim/-/event-target-shim-5.0.1.tgz#5d4d3ebdf9583d63a5333ce2deb7480ab2b05789"
   integrity sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==
 
+eventsource-parser@^3.0.6:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/eventsource-parser/-/eventsource-parser-3.0.6.tgz#292e165e34cacbc936c3c92719ef326d4aeb4e90"
+  integrity sha512-Vo1ab+QXPzZ4tCa8SwIHJFaSzy4R6SHf7BY79rFBDf0idraZWAkYrDjDj8uWaSm3S2TK+hJ7/t1CEmZ7jXw+pg==
+
 form-data-encoder@1.7.2:
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/form-data-encoder/-/form-data-encoder-1.7.2.tgz#1f1ae3dccf58ed4690b86d87e4f57c654fbab040"
@@ -329,6 +400,11 @@ is-core-module@^2.16.0:
   integrity sha512-UfoeMA6fIJ8wTYFEUjelnaGI67v6+N7qXJEvQuIGa99l4xsCruSYOVSQ0uPANn4dAzm8lkYPaKLrrijLq7x23w==
   dependencies:
     hasown "^2.0.2"
+
+json-schema@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/json-schema/-/json-schema-0.4.0.tgz#f7de4cf6efab838ebaeb3236474cbba5a1930ab5"
+  integrity sha512-es94M3nTIfsEPisRafak+HDLfHXnKBhV3vU5eqPcS3flIWqcxJWgXHXiey3YrpaNsanY5ei1VoYEbOzijuq9BA==
 
 knex@*, knex@^3.1.0:
   version "3.1.0"
@@ -612,3 +688,8 @@ yn@3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/yn/-/yn-3.1.1.tgz#1e87401a09d767c1d5eab26a6e4c185182d2eb50"
   integrity sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==
+
+zod@^4.3.5:
+  version "4.3.5"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-4.3.5.tgz#aeb269a6f9fc259b1212c348c7c5432aaa474d2a"
+  integrity sha512-k7Nwx6vuWx1IJ9Bjuf4Zt1PEllcwe7cls3VNzm4CQ1/hgtFUK2bRNG3rvnpPUhFjmqJKAKtjV576KnUkHocg/g==
